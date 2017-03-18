@@ -1,11 +1,5 @@
-# server-side UI logic
-# last update: 2016-10-07
-
-output$versionHistory <- renderText({
-        do.call(paste, as.list(apply(verHistory,1,function(x){ 
-                paste0('<p><strong>Version ', x[1], '</strong></p>',
-                       '<p>', x[2], '</p>') })))
-})
+# server-side mobile UI logic
+# last update: 2017-01-03
 
 output$hdrImageLinkMobile <- renderUI({
         # fix for "Raspberry Navigation"
@@ -36,41 +30,3 @@ renderHdrImageLink <- function() {
                 tags$a(href=input$store$pia_url, headerTitle())
         )
 }
-
-observeEvent(input$buttonVisual, {
-        session$sendCustomMessage(type='setDisplayButton', 
-                                  'buttonVisual')
-        output$displayVisual <- renderText('.')
-        output$displaySource <- renderText('')
-        output$displayStore <- renderText('')
-})
-
-observeEvent(input$buttonSource, {
-        session$sendCustomMessage(type='setDisplayButton', 
-                                  'buttonSource')
-        output$displayVisual <- renderText('')
-        output$displaySource <- renderText('.')
-        output$displayStore <- renderText('')
-})
-
-observeEvent(input$buttonStore, {
-        session$sendCustomMessage(type='setDisplayButton', 
-                                  'buttonStore')
-        output$displayVisual <- renderText('')
-        output$displaySource <- renderText('')
-        output$displayStore <- renderText('.')
-})
-
-output$displayVisual <- reactive({
-        output$displayVisual <- renderText('.')
-        output$displaySource <- renderText('')
-        output$displayStore <- renderText('')
-})
-
-output$dataSheetDirty <- reactive({
-        output$dataSheetDirty <- renderText('')
-})
-
-observeEvent(input$backToApp, {
-        updateNavbarPage(session, 'mainPage', selected = appName)
-})

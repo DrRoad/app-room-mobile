@@ -1,13 +1,12 @@
-# top-level file for UI with option to switch between desktop and mobile
-# last update:2016-10-06
+# top-level file for mobile UI
+# last update:2017-03-02
 shinyUI(
-        uiMobile()
-        # tagList(
-        #         conditionalPanel(
-        #                 condition=(isDesktop),
-        #                 uiDesktop()),
-        #         conditionalPanel(
-        #                 condition=(isMobile),
-        #                 uiMobile())
-        # )
+        tagList(
+                initStore("store", "oydStore"),
+                tags$script(
+                        'Shiny.addCustomMessageHandler("setDesktopUrl", function(x) {      
+                                $("#desktoplink").attr("href", x);
+                        })'),
+                appMobile()
+        )
 )

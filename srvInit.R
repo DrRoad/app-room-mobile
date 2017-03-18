@@ -1,5 +1,14 @@
-# functions for handling the initial dialog when starting the app
-# last update: 2016-07-27
+# functions for handling UI and initial setup
+# last update: 2017-03-01
+
+output$hdrImageLinkMobile <- renderUI({
+        tags$div(
+                tags$a(href=input$store$pia_url,
+                       tags$img(height='25px', style='margin-top:-5px',
+                                src=oydLogo)),
+                tags$a(href=input$store$pia_url, appTitle)
+        )
+})
 
 observe({
         session$sendCustomMessage(type='setPiaUrl',
@@ -47,6 +56,13 @@ observe({
                 updateTextInput(session, 'app_secretMobile', value=appSecret)
                 output$currentToken <- renderText('')
         }
+        appStart()
+        desktopUrl <- paste0(
+                desktopUrl, 
+                '?PIA_URL=', piaUrl,
+                '&APP_KEY=', appKey,
+                '&APP_SECRET=', appSecret)
+        session$sendCustomMessage(type='setDesktopUrl', desktopUrl)
 })
 
 output$connectError <- renderUI({
