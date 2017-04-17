@@ -4,6 +4,6 @@
 # constants required for every app
 appTitle <- 'Mobiles Template'
 app_id <- 'eu.ownyourdata.room'
-desktopUrl <- 'https://raumklima.datentresor.org'
+desktopUrl <- 'https://raumklima.oydapp.eu'
 
 actuatorUiList <- vector()
